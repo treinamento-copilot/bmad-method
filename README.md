@@ -126,6 +126,16 @@ npm start           # Inicia API em modo produção
 npm run start:api   # Inicia apenas API em produção
 ```
 
+### Deploy
+```bash
+# Deploy manual (via Render Dashboard)
+# 1. Frontend: conectar repositório no Render como Static Site
+# 2. Backend: conectar repositório no Render como Web Service
+
+# Deploy automático (via GitHub Actions)
+git push origin main  # Triggers deploy automático quando CI passa
+```
+
 ### Utilitários
 ```bash
 npm run clean       # Remove node_modules de todos os projetos
@@ -214,6 +224,84 @@ GET /health/detailed          # Status detalhado
     "requestId": "abc123"
   }
 }
+```
+
+## 🚀 Deploy
+
+### URLs de Produção
+
+[![Deploy Status](https://img.shields.io/badge/Deploy-Success-success)](https://github.com/your-org/churrasapp/actions)
+
+- **Frontend (Produção)**: [https://churrasapp.render.com](https://churrasapp.render.com)
+- **Backend API (Produção)**: [https://churrasapp-api.render.com](https://churrasapp-api.render.com)
+- **Health Check**: [https://churrasapp-api.render.com/health](https://churrasapp-api.render.com/health)
+
+### Deploy Manual
+
+1. **Frontend (Render Static Site)**:
+   - Conectar repositório no [Render Dashboard](https://dashboard.render.com)
+   - Configurar como "Static Site"
+   - Build Command: `npm ci && npm run build:web`
+   - Publish Directory: `apps/web/build`
+
+2. **Backend (Render Web Service)**:
+   - Conectar repositório no [Render Dashboard](https://dashboard.render.com)
+   - Configurar como "Web Service"
+   - Build Command: `npm ci`
+   - Start Command: `npm run start:api`
+   - Health Check Path: `/health`
+
+### Deploy Automático (CI/CD)
+
+O projeto está configurado com GitHub Actions para deploy automático:
+
+```bash
+# Deploy é triggered automaticamente ao fazer push para main
+git push origin main
+
+# OU deploy manual via GitHub Actions
+# GitHub → Actions → Deploy to Render → Run workflow
+```
+
+### Configuração das Variáveis de Ambiente
+
+#### GitHub Secrets (obrigatórios para CI/CD)
+```bash
+RENDER_API_KEY=your_render_api_key
+RENDER_FRONTEND_SERVICE_ID=srv-xxx
+RENDER_BACKEND_SERVICE_ID=srv-yyy
+```
+
+#### Render Environment Variables (Backend)
+```bash
+NODE_ENV=production
+# PORT é configurado automaticamente pelo Render
+```
+
+### Troubleshooting de Deploy
+
+#### Frontend não carrega
+```bash
+# Verificar se o build foi bem-sucedido
+npm run build:web
+
+# Verificar se arquivos estão no diretório correto
+ls -la apps/web/build/
+```
+
+#### Backend retorna 503/erro de conexão
+```bash
+# Verificar health check
+curl https://churrasapp-api.render.com/health
+
+# Verificar logs no Render Dashboard
+```
+
+#### Deploy falha no CI/CD
+```bash
+# Verificar se todas as GitHub Secrets estão configuradas
+# Verificar se testes estão passando localmente
+npm test
 ```
 
 ## 🐛 Solução de Problemas

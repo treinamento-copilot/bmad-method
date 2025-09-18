@@ -1,0 +1,46 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run Frontend Tests
+        run: npm run test:web
+        env:
+          CI: true
+      
+      - name: Run Backend Tests
+        run: npm run test:api
+      
+      - name: Build Frontend
+        run: npm run build:web
+      
+      - name: Test Backend Health Check
+        run: |
+          npm run start:api &
+          sleep 5
+          curl -f http://localhost:3001/health || exit 1
+          pkill -f "node apps/api/src/server.js" || true

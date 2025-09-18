@@ -25,27 +25,7 @@ Para que eu possa desenvolver de forma consistente e fazer deploy desde o primei
 6. Variáveis de ambiente configuradas (.env.example criado)
 7. README.md com instruções detalhadas de setup local
 
-## Story 1.2: Pipeline de CI/CD Básico no GitHub Actions
-Como um desenvolvedor,
-Eu quero ter deploy automático configurado desde o início,
-Para que cada push para main seja automaticamente deployado.
-
-### Critérios de Aceitação
-1. Arquivo `.github/workflows/ci.yml` criado com:
-   - Testes automatizados para frontend e backend
-   - Build do frontend verificado
-   - Linting básico (ESLint)
-2. Arquivo `.github/workflows/deploy.yml` criado com:
-   - Deploy automático do frontend para Render Static Site
-   - Deploy automático do backend para Render Web Service
-   - Deploy triggerado apenas no push para branch main
-3. Secrets do GitHub configurados para deploy:
-   - RENDER_API_KEY
-   - MONGODB_URI para produção
-4. Status badges no README mostrando build status
-5. Deploy funcional end-to-end (frontend + backend + banco)
-
-## Story 1.3: Configuração do Projeto e Infraestrutura Básica
+## Story 1.2: Configuração do Projeto e Infraestrutura Básica
 Como um desenvolvedor,
 Eu quero estabelecer a estrutura básica do projeto,
 Para que eu possa desenvolver e fazer deploy de funcionalidades incrementalmente.
@@ -57,7 +37,7 @@ Para que eu possa desenvolver e fazer deploy de funcionalidades incrementalmente
 4. Deploy básico funcionando (Netlify + Railway/Render)
 5. README com instruções de configuração local
 
-## Story 1.4: Modelo de Dados do Evento e Armazenamento com MongoDB
+## Story 1.3: Modelo de Dados do Evento e Armazenamento com MongoDB
 Como um organizador,
 Eu quero que o sistema armazene os dados do meu evento de forma estruturada,
 Para que as informações persistam e possam ser acessadas posteriormente.
@@ -73,7 +53,7 @@ Para que as informações persistam e possam ser acessadas posteriormente.
 5. Funções CRUD básicas implementadas e testadas
 6. Índices otimizados criados para consultas frequentes
 
-## Story 1.5: Formulário de Criação de Evento
+## Story 1.4: Formulário de Criação de Evento
 Como um organizador,
 Eu quero criar um novo evento de churrasco facilmente,
 Para que eu possa começar a organizar sem complicações.
@@ -85,7 +65,7 @@ Para que eu possa começar a organizar sem complicações.
 4. Botão "Criar Evento" que salva e gera ID único
 5. Responsivo para mobile (320px+)
 
-## Story 1.6: Visualização do Evento e Dashboard Básico
+## Story 1.5: Visualização do Evento e Dashboard Básico
 Como um organizador,
 Eu quero visualizar os detalhes do meu evento criado,
 Para que eu possa verificar se as informações estão corretas.
@@ -97,7 +77,7 @@ Para que eu possa verificar se as informações estão corretas.
 4. Design mobile-first com texto legível
 5. Navegação simples de volta para criação
 
-## Story 1.7: Otimização Móvel Básica
+## Story 1.6: Otimização Móvel Básica
 Como um usuário de qualquer idade,
 Eu quero usar o app facilmente no meu celular,
 Para que eu não precise de computador para organizar eventos.

@@ -47,4 +47,8 @@ app.use('*', (req, res) => {
   });
 });
 
+/**
+ * Exporta a instância do Express app para ser utilizada em testes
+ * ou para inicialização do servidor em outro arquivo.
+ */
 module.exports = app;
