@@ -16,12 +16,12 @@ describe('ChurrasApp Frontend - Basic Tests', () => {
       expect(appElement).toBeInTheDocument();
     });
 
-    test('renders learn react link', () => {
+    test('renders ChurrasApp Dashboard', () => {
       render(<App />);
       
-      // Create React App vem com este link por padrão
-      const linkElement = screen.getByText(/learn react/i);
-      expect(linkElement).toBeInTheDocument();
+      // Verificar se o título do dashboard está presente
+      const dashboardTitle = screen.getByText(/ChurrasApp Dashboard/i);
+      expect(dashboardTitle).toBeInTheDocument();
     });
 
     test('has basic structure elements', () => {
@@ -30,6 +30,31 @@ describe('ChurrasApp Frontend - Basic Tests', () => {
       // Verificar se existe uma estrutura básica
       const appDiv = document.querySelector('.App');
       expect(appDiv).toBeInTheDocument();
+      
+      // Verificar se navbar está presente
+      const navbar = document.querySelector('.navbar');
+      expect(navbar).toBeInTheDocument();
+      
+      // Verificar se main content está presente
+      const mainContent = document.querySelector('.App-main');
+      expect(mainContent).toBeInTheDocument();
+    });
+
+    test('renders dashboard components', () => {
+      render(<App />);
+      
+      // Verificar se elementos específicos do dashboard estão presentes
+      const statsGrid = document.querySelector('.statsGrid');
+      expect(statsGrid).toBeInTheDocument();
+      
+      const actionsGrid = document.querySelector('.actionsGrid');
+      expect(actionsGrid).toBeInTheDocument();
+      
+      const createEventButton = screen.getByText(/Criar Evento/i);
+      expect(createEventButton).toBeInTheDocument();
+      
+      const recentActivitySection = document.querySelector('.recentActivity');
+      expect(recentActivitySection).toBeInTheDocument();
     });
   });
 

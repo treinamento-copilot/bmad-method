@@ -1,0 +1,139 @@
+/* Navbar Styles */
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+/* Brand */
+.navBrand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.brandIcon {
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+
+.brandText {
+  color: #2c3e50;
+}
+
+/* Navigation Menu */
+.navMenu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navItem {
+  margin: 0 8px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #6c757d;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.navLink:hover {
+  color: #e74c3c;
+  background-color: #f8f9fa;
+}
+
+.navLink.active {
+  color: #e74c3c;
+  background-color: #fef5f5;
+}
+
+/* Actions */
+.navActions {
+  display: flex;
+  align-items: center;
+}
+
+.newEventBtn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.newEventBtn:hover {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.newEventBtn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 0 16px;
+  }
+
+  .navMenu {
+    display: none; /* Will be replaced with hamburger menu in future */
+  }
+
+  .brandText {
+    display: none;
+  }
+
+  .brandIcon {
+    margin-right: 0;
+  }
+
+  .newEventBtn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navContainer {
+    padding: 0 12px;
+    height: 56px;
+  }
+
+  .navBrand {
+    font-size: 1.1rem;
+  }
+
+  .newEventBtn {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+}
