@@ -11,7 +11,7 @@ const Dashboard = () => {
 
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <div className={styles.statIcon}>🎪</div>
+          <div className={styles.statIcon}>🔥</div>
           <div className={styles.statContent}>
             <h3 className={styles.statTitle}>Eventos</h3>
             <p className={styles.statValue}>0</p>

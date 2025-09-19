@@ -1,12 +1,12 @@
 /* App Container */
 .App {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 /* Main Content Area */
 .App-main {
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: calc(100vh - 64px);
   padding-top: 0;
 }
