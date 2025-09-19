@@ -3,6 +3,7 @@
  */
 
 const express = require('express');
+const { isHealthy, getConnectionInfo } = require('../utils/database');
 const router = express.Router();
 
 /**
@@ -11,15 +12,22 @@ const router = express.Router();
  * @returns {Object} Status da API
  */
 router.get('/', (req, res) => {
-  res.status(200).json({
+  const dbHealth = isHealthy();
+  const dbInfo = getConnectionInfo();
+  
+  res.status(dbHealth ? 200 : 503).json({
     data: {
-      status: 'OK',
+      status: dbHealth ? 'OK' : 'DEGRADED',
       service: 'ChurrasApp API',
       version: '1.0.0',
       uptime: process.uptime(),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      database: {
+        status: dbInfo.status,
+        healthy: dbHealth
+      }
     },
-    error: null,
+    error: dbHealth ? null : 'Database connection issues',
     meta: {
       timestamp: new Date().toISOString(),
       requestId: req.headers['x-request-id'] || 'no-id'
@@ -33,9 +41,12 @@ router.get('/', (req, res) => {
  * @returns {Object} Status detalhado da API
  */
 router.get('/detailed', (req, res) => {
-  res.status(200).json({
+  const dbHealth = isHealthy();
+  const dbInfo = getConnectionInfo();
+  
+  res.status(dbHealth ? 200 : 503).json({
     data: {
-      status: 'OK',
+      status: dbHealth ? 'OK' : 'DEGRADED',
       service: 'ChurrasApp API',
       version: '1.0.0',
       uptime: process.uptime(),
@@ -46,9 +57,10 @@ router.get('/detailed', (req, res) => {
       memory: {
         used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
         total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024)
-      }
+      },
+      database: dbInfo
     },
-    error: null,
+    error: dbHealth ? null : 'Database connection issues',
     meta: {
       timestamp: new Date().toISOString(),
       requestId: req.headers['x-request-id'] || 'no-id'
