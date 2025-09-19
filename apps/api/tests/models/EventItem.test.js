@@ -204,7 +204,9 @@ describe('EventItem Model', () => {
       await EventItem.createItem(testUtils.createEventItemData(testEvent.id, { name: 'Cerveja' }));
       
       // Criar outro evento e item
-      const otherEvent = await Event.createEvent(testUtils.createEventData({ name: 'Outro Evento' }));
+      const otherEvent = await Event.createEvent(
+        testUtils.createEventData({ name: `Other Event ${Date.now()}` })
+      );
       await EventItem.createItem(testUtils.createEventItemData(otherEvent.id, { name: 'Linguiça' }));
 
       const items = await EventItem.findByEvent(testEvent.id);
