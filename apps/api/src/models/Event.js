@@ -217,18 +217,16 @@ eventSchema.statics.deleteByPublicId = async function(publicId) {
 /**
  * Busca evento com relacionamentos (guests e items)
  * @param {string} publicId - ID público do evento
+ * @param {Model} Guest - Modelo Guest injetado para evitar dependência circular
+ * @param {Model} EventItem - Modelo EventItem injetado para evitar dependência circular
  * @returns {Promise<Object|null>}
  */
-eventSchema.statics.findWithRelations = async function(publicId) {
+eventSchema.statics.findWithRelations = async function(publicId, Guest, EventItem) {
   try {
     const event = await this.findByPublicId(publicId);
     if (!event) return null;
 
-    // Import dinâmico para evitar circular dependency
-    const Guest = require('./Guest');
-    const EventItem = require('./EventItem');
-
-    // Busca relacionamentos
+    // Busca relacionamentos usando modelos injetados
     const [guests, items] = await Promise.all([
       Guest.find({ eventId: publicId }),
       EventItem.find({ eventId: publicId })
