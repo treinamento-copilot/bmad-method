@@ -15,10 +15,12 @@ describe('Security Headers', () => {
 
       // Verifica headers de segurança do Helmet
       expect(response.headers['x-content-type-options']).toBe('nosniff');
-      expect(response.headers['x-frame-options']).toBe('DENY');
       expect(response.headers['x-download-options']).toBe('noopen');
       expect(response.headers['x-permitted-cross-domain-policies']).toBe('none');
       expect(response.headers['referrer-policy']).toBe('no-referrer');
+      
+      // X-Frame-Options foi removido conforme solicitação
+      expect(response.headers['x-frame-options']).toBeUndefined();
     });
 
     test('deve incluir Content Security Policy', async () => {
