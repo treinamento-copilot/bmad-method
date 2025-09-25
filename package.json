@@ -19,7 +19,19 @@
     "install:all": "npm install",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
     "start": "npm run start --workspace=apps/api",
-    "start:api": "npm run start --workspace=apps/api"
+    "start:api": "npm run start --workspace=apps/api",
+    "docker:up": "docker compose --env-file .env.docker up",
+    "docker:up:build": "docker compose --env-file .env.docker up --build",
+    "docker:down": "docker compose down",
+    "docker:down:clean": "docker compose down -v --remove-orphans",
+    "docker:logs": "docker compose logs -f",
+    "docker:logs:api": "docker compose logs -f api",
+    "docker:logs:db": "docker compose logs -f mongodb",
+    "docker:rebuild": "docker compose down && docker compose --env-file .env.docker up --build",
+    "docker:shell:api": "docker compose exec api sh",
+    "docker:shell:db": "docker compose exec mongodb mongosh",
+    "docker:test:api": "docker compose exec api npm test",
+    "docker:health": "docker compose ps"
   },
   "keywords": [
     "churrasapp",

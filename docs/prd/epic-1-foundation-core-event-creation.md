@@ -53,7 +53,23 @@ Para que as informações persistam e possam ser acessadas posteriormente.
 5. Funções CRUD básicas implementadas e testadas
 6. Índices otimizados criados para consultas frequentes
 
-## Story 1.4: Formulário de Criação de Evento
+## Story 1.4: Dockerização do Ambiente de Desenvolvimento
+Como um desenvolvedor,
+Eu quero um ambiente de desenvolvimento dockerizado com MongoDB,
+Para que eu possa executar a aplicação localmente sem configurações manuais complexas e ter consistência entre ambientes.
+
+### Critérios de Aceitação
+1. Docker Compose configurado com serviços: api, mongodb, web (opcional)
+2. MongoDB containerizado com dados persistentes via volumes
+3. API Express.js executando em container com hot-reload para desenvolvimento
+4. Environment variables configuradas para containers
+5. Existing conexão MongoDB continua funcionando com container
+6. Existing models (Event, Guest, EventItem) continuam operando normalmente
+7. Ambiente é reproduzível em qualquer máquina com Docker
+8. Documentação atualizada com instruções de setup
+9. Performance de desenvolvimento mantida (hot-reload funcional)
+
+## Story 1.5: Formulário de Criação de Evento
 Como um organizador,
 Eu quero criar um novo evento de churrasco facilmente,
 Para que eu possa começar a organizar sem complicações.
@@ -63,9 +79,8 @@ Para que eu possa começar a organizar sem complicações.
 2. Template pré-preenchido com itens básicos (carne, bebidas, carvão)
 3. Estimativa automática de quantidades baseada no número de pessoas
 4. Botão "Criar Evento" que salva e gera ID único
-5. Responsivo para mobile (320px+)
 
-## Story 1.5: Visualização do Evento e Dashboard Básico
+## Story 1.6: Visualização do Evento e Dashboard Básico
 Como um organizador,
 Eu quero visualizar os detalhes do meu evento criado,
 Para que eu possa verificar se as informações estão corretas.
@@ -77,14 +92,3 @@ Para que eu possa verificar se as informações estão corretas.
 4. Design mobile-first com texto legível
 5. Navegação simples de volta para criação
 
-## Story 1.6: Otimização Móvel Básica
-Como um usuário de qualquer idade,
-Eu quero usar o app facilmente no meu celular,
-Para que eu não precise de computador para organizar eventos.
-
-### Critérios de Aceitação
-1. Interface 100% responsiva para telas de 320px-414px
-2. Botões grandes (mínimo 44px) para toque fácil
-3. Texto legível (mínimo 16px) sem zoom
-4. Scrolling suave e intuitivo
-5. Carregamento rápido em conexões 3G

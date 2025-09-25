@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  # MongoDB Database Service
+  mongodb:
+    image: mongo:6.0
+    container_name: churrasapp-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-churrasapp123}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-churrasapp}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - churrasapp-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # API Backend Service
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: churrasapp-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      MONGODB_URI: mongodb://mongodb:27017/churrasapp
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/api/src:/app/src:cached
+      - ./apps/api/tests:/app/tests:cached
+      - /app/node_modules
+    networks:
+      - churrasapp-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Web Frontend Service (Optional for development)
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: churrasapp-web
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:3000
+      NODE_ENV: development
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./apps/web/src:/app/src:cached
+      - ./apps/web/public:/app/public:cached
+      - /app/node_modules
+    networks:
+      - churrasapp-network
+    depends_on:
+      - api
+    profiles:
+      - fullstack
+
+# Named volumes for data persistence
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+
+# Custom network for service communication
+networks:
+  churrasapp-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16

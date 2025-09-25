@@ -28,7 +28,9 @@ npm --version   # deve ser >= 8.0.0
 
 ## 🛠️ Setup Local
 
-### 1. Clone e Instale Dependências
+### Opção 1: Setup Tradicional (Node.js + MongoDB locais)
+
+#### 1. Clone e Instale Dependências
 
 ```bash
 # Clone o repositório
@@ -39,7 +41,7 @@ cd churrasapp
 npm install
 ```
 
-### 2. Configure Variáveis de Ambiente
+#### 2. Configure Variáveis de Ambiente
 
 ```bash
 # Copie o template de variáveis de ambiente
@@ -49,7 +51,7 @@ cp .env.example .env
 # As configurações padrão funcionam para desenvolvimento local
 ```
 
-### 3. Inicie os Serviços
+#### 3. Inicie os Serviços
 
 ```bash
 # Iniciar frontend + backend simultaneamente
@@ -60,11 +62,140 @@ npm run dev:web    # Frontend apenas (porta 3000)
 npm run dev:api    # Backend apenas (porta 3001)
 ```
 
-### 4. Acesse a Aplicação
+#### 4. Acesse a Aplicação
 
 - **Frontend**: <http://localhost:3000>
 - **Backend API**: <http://localhost:3001>
 - **Health Check**: <http://localhost:3001/health>
+
+### Opção 2: Setup com Docker (Recomendado)
+
+O Docker elimina problemas de configuração e garante consistência entre ambientes.
+
+#### 🐳 Pré-requisitos Docker
+
+```bash
+# Instalar Docker e Docker Compose
+# Ubuntu/Debian:
+sudo apt-get update
+sudo apt-get install docker.io docker-compose
+
+# macOS:
+brew install docker docker-compose
+
+# Verificar instalação
+docker --version
+docker-compose --version
+```
+
+#### 🚀 Início Rápido com Docker
+
+```bash
+# 1. Clone o repositório
+git clone <repository-url>
+cd churrasapp
+
+# 2. Inicie todos os serviços (MongoDB + API)
+npm run docker:up:build
+
+# 3. Acesse a aplicação
+# Frontend: http://localhost:3001 (se usar perfil fullstack)
+# API: http://localhost:3000
+# MongoDB: localhost:27017
+```
+
+#### 🔧 Comandos Docker Disponíveis
+
+```bash
+# === COMANDOS BÁSICOS ===
+npm run docker:up              # Inicia todos os serviços
+npm run docker:up:build        # Inicia e rebuilda containers
+npm run docker:down            # Para todos os serviços
+npm run docker:down:clean      # Para e remove volumes/networks
+
+# === LOGS E DEBUGGING ===
+npm run docker:logs            # Todos os logs em tempo real
+npm run docker:logs:api        # Logs apenas da API
+npm run docker:logs:db         # Logs apenas do MongoDB
+npm run docker:health          # Status de todos os containers
+
+# === REBUILD E MANUTENÇÃO ===
+npm run docker:rebuild         # Para, rebuilda e inicia
+npm run docker:shell:api       # Acessa shell do container da API
+npm run docker:shell:db        # Acessa MongoDB shell
+npm run docker:test:api        # Executa testes dentro do container
+```
+
+#### 📦 Serviços Docker
+
+| Serviço | Porta Externa | Porta Interna | Descrição |
+|---------|---------------|---------------|-----------|
+| `mongodb` | 27017 | 27017 | Banco de dados MongoDB 6.0 |
+| `api` | 3000 | 3000 | Backend Node.js com hot-reload |
+| `web` | 3001 | 3000 | Frontend React (opcional, perfil fullstack) |
+
+#### 🔄 Hot Reload no Docker
+
+O ambiente Docker está configurado com volumes para hot-reload automático:
+
+```bash
+# Mudanças no código são automaticamente refletidas
+# Edite arquivos em apps/api/src/ ou apps/web/src/
+# Os containers detectam automaticamente as mudanças
+```
+
+#### 🗄️ Persistência de Dados
+
+Os dados do MongoDB são persistentes entre reinicializações:
+
+```bash
+# Dados são mantidos mesmo após parar containers
+npm run docker:down
+npm run docker:up
+
+# Para remover dados persistentes (CUIDADO!)
+npm run docker:down:clean  # Remove volumes
+```
+
+#### 🔍 Troubleshooting Docker
+
+```bash
+# Verificar status dos containers
+npm run docker:health
+
+# Verificar logs em caso de erro
+npm run docker:logs:api
+
+# Rebuild completo se houver problemas
+npm run docker:rebuild
+
+# Verificar se portas estão livres
+lsof -ti:3000
+lsof -ti:27017
+
+# Verificar espaço em disco (Docker pode consumir espaço)
+docker system df
+docker system prune  # Limpa recursos não utilizados
+```
+
+#### ⚙️ Configuração Avançada Docker
+
+Para customizar configurações Docker, edite:
+
+- `docker-compose.yml` - Orquestração de serviços
+- `.env.docker` - Variáveis de ambiente Docker
+- `apps/api/Dockerfile` - Build da API
+- `apps/web/Dockerfile` - Build do frontend (se usar)
+
+### 🎯 Qual Método Escolher?
+
+| Cenário | Recomendação |
+|---------|--------------|
+| **Desenvolvimento rápido** | 🐳 Docker (setup instantâneo) |
+| **Depuração avançada** | 🔧 Tradicional (mais controle) |
+| **Primeiro uso** | 🐳 Docker (sem configuração manual) |
+| **CI/CD** | 🐳 Docker (consistência) |
+| **Produção local** | 🐳 Docker (isolamento) |
 
 ## 📁 Estrutura do Projeto
 
