@@ -1,0 +1,149 @@
+/**
+ * Estilos da página CreateEvent
+ * CSS Modules - ChurrasApp
+ */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.pageTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -1px;
+}
+
+.pageSubtitle {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.successMessage {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #c3e6cb;
+  text-align: center;
+  animation: slideIn 0.5s ease-out;
+}
+
+.successMessage h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.successMessage p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.footer {
+  text-align: center;
+  color: white;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* Animações */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+  
+  .pageTitle {
+    font-size: 2.5rem;
+  }
+  
+  .pageSubtitle {
+    font-size: 1.1rem;
+  }
+  
+  .content {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+    padding-top: 1rem;
+  }
+  
+  .pageTitle {
+    font-size: 2rem;
+  }
+  
+  .pageSubtitle {
+    font-size: 1rem;
+  }
+  
+  .successMessage {
+    padding: 1.5rem;
+  }
+  
+  .successMessage h2 {
+    font-size: 1.3rem;
+  }
+  
+  .successMessage p {
+    font-size: 1rem;
+  }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .successMessage {
+    animation: none;
+  }
+}
+
+/* Tema escuro (se aplicável no futuro) */
+@media (prefers-color-scheme: dark) {
+  .successMessage {
+    background-color: #1e3d32;
+    color: #a7ffeb;
+    border-color: #2e7d5c;
+  }
+}
