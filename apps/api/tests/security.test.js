@@ -55,12 +55,12 @@ describe('Security Headers - Helmet Configuration', () => {
       expect(response.headers['x-xss-protection']).toBe('0');
     });
 
-    test('should include X-DNS-Prefetch-Control header', async () => {
+    test('should NOT include X-DNS-Prefetch-Control header (disabled)', async () => {
       const response = await request(app)
         .get('/health')
         .expect(503);
 
-      expect(response.headers['x-dns-prefetch-control']).toBe('off');
+      expect(response.headers['x-dns-prefetch-control']).toBeUndefined();
     });
   });
 

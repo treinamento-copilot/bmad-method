@@ -26,7 +26,8 @@ app.use(helmet({
     }
   },
   crossOriginEmbedderPolicy: false, // Permite comunicação entre origins para CORS
-  crossOriginResourcePolicy: false // Permite recursos cross-origin para CORS
+  crossOriginResourcePolicy: false, // Permite recursos cross-origin para CORS
+  dnsPrefetchControl: false // Desabilita proteção do header x-dns-prefetch-control
 }));
 
 // Middleware
