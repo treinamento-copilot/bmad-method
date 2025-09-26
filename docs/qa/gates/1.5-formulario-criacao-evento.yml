@@ -1,0 +1,78 @@
+schema: 1
+story: "1.5"
+story_title: "Formulário de Criação de Evento"
+gate: FAIL
+status_reason: "Implementação 0% completa - todos os arquivos estão vazios, nenhum AC foi atendido"
+reviewer: "Quinn (Test Architect)"
+updated: "2025-09-26T21:00:00Z"
+
+waiver: { active: false }
+
+top_issues:
+  - id: "IMPL-001"
+    severity: high
+    finding: "EventForm.jsx completamente vazio - componente principal não implementado"
+    suggested_action: "Implementar componente React com formulário completo conforme especificação"
+  - id: "IMPL-002"
+    severity: high
+    finding: "eventService.js vazio - sem comunicação com API"
+    suggested_action: "Implementar service layer para POST /events endpoint"
+  - id: "API-001"
+    severity: high
+    finding: "Rota POST /events não existe no backend"
+    suggested_action: "Criar controller e rota para criação de eventos"
+  - id: "TEST-001"
+    severity: high
+    finding: "Todos os arquivos de teste estão vazios"
+    suggested_action: "Implementar testes unitários para componentes e services"
+  - id: "AC-001"
+    severity: high
+    finding: "Nenhum Acceptance Criteria foi implementado (0/4)"
+    suggested_action: "Implementar todos os ACs: formulário, template, cálculo automático, criação"
+
+risk_summary:
+  totals: { critical: 0, high: 5, medium: 0, low: 0 }
+  recommendations:
+    must_fix: 
+      - "Implementar EventForm.jsx do zero"
+      - "Criar rota POST /events no backend"
+      - "Implementar eventService.js"
+      - "Criar todos os testes unitários"
+    monitor: []
+
+quality_score: 0  # Nenhuma implementação = 0 pontos
+
+evidence:
+  tests_reviewed: 0
+  risks_identified: 5
+  trace:
+    ac_covered: []  # Nenhum AC coberto
+    ac_gaps: [1, 2, 3, 4]  # Todos os ACs têm gaps
+
+nfr_validation:
+  security:
+    status: FAIL
+    notes: "Sem implementação para avaliar - validações de segurança ausentes"
+  performance:
+    status: FAIL
+    notes: "Sem implementação para avaliar"
+  reliability:
+    status: FAIL
+    notes: "Sem implementação para avaliar - tratamento de erro ausente"
+  maintainability:
+    status: FAIL
+    notes: "Sem código para manter - estrutura criada mas vazia"
+
+recommendations:
+  immediate:
+    - action: "Implementar EventForm component com todos os campos obrigatórios"
+      refs: ["apps/web/src/components/event/EventForm/EventForm.jsx"]
+    - action: "Criar POST /events route no backend"
+      refs: ["apps/api/src/routes/events.js"]
+    - action: "Implementar eventService para comunicação com API"
+      refs: ["apps/web/src/services/eventService.js"]
+    - action: "Implementar template de itens básicos e cálculo automático"
+      refs: ["apps/web/src/utils/constants.js"]
+  future:
+    - action: "Adicionar validação avançada e UX melhorada após implementação básica"
+      refs: ["apps/web/src/components/event/EventForm/"]

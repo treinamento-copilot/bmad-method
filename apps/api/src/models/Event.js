@@ -164,16 +164,16 @@ eventSchema.statics.deleteByPublicId = function(publicId) {
  * @returns {Promise<Object>}
  */
 eventSchema.statics.findWithRelations = async function(publicId) {
-  const mongoose = require('mongoose');
   const Guest = mongoose.model('Guest');
   const EventItem = mongoose.model('EventItem');
   
   const event = await this.findByPublicId(publicId);
   if (!event) return null;
   
-  const [guests, items] = await Promise.all([
+  const [guests, items, confirmedGuestCount] = await Promise.all([
     Guest.find({ eventId: publicId }),
-    EventItem.find({ eventId: publicId })
+    EventItem.find({ eventId: publicId }),
+    Guest.countDocuments({ eventId: publicId, rsvpStatus: 'yes' })
   ]);
   
   return {
@@ -181,7 +181,7 @@ eventSchema.statics.findWithRelations = async function(publicId) {
     guests,
     items,
     guestCount: guests.length,
-    confirmedGuestCount: guests.filter(g => g.rsvpStatus === 'yes').length
+    confirmedGuestCount
   };
 };
 

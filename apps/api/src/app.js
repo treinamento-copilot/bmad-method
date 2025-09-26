@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/health', require('./routes/health'));
+app.use('/api/events', require('./routes/events'));
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
