@@ -3,6 +3,53 @@
   min-height: 100vh;
 }
 
+/* Cabeçalho da página */
+.pageHeader {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.navButton {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navButton:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(59, 130, 246, 0.3);
+}
+
+.navButton:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    position: static;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .navButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Error Handling Styles */
 .errorContainer {
   position: fixed;
