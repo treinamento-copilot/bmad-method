@@ -74,12 +74,12 @@ describe('Security Headers - Helmet Configuration', () => {
       expect(csp).toMatch(/frame-src 'none'/);
     });
 
-    test('CSP should allow images from self, data and https', async () => {
+    test('CSP should allow images from any source (permissive)', async () => {
       const response = await request(app)
         .get('/health');
 
       const csp = response.headers['content-security-policy'];
-      expect(csp).toMatch(/img-src 'self' data: https:/);
+      expect(csp).toMatch(/img-src 'self' data: https: \*/);
     });
 
     test('CSP should restrict connections to self only', async () => {
@@ -91,15 +91,15 @@ describe('Security Headers - Helmet Configuration', () => {
     });
   });
 
-  describe('CORS Integration', () => {
-    test('should maintain CORS functionality with security headers', async () => {
+  describe('No CORS Policy', () => {
+    test('should not include CORS headers', async () => {
       const response = await request(app)
         .options('/health')
         .set('Origin', 'http://localhost:3000')
         .set('Access-Control-Request-Method', 'GET');
 
-      // CORS deve funcionar normalmente
-      expect(response.headers['access-control-allow-origin']).toBe('http://localhost:3000');
+      // CORS headers não devem estar presentes
+      expect(response.headers['access-control-allow-origin']).toBeUndefined();
       
       // Headers de segurança devem estar presentes mesmo em OPTIONS
       expect(response.headers['x-content-type-options']).toBe('nosniff');
