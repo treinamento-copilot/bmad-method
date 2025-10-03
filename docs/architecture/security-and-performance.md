@@ -8,9 +8,16 @@
 - Secure Storage: localStorage para organizerId (não sensitivo)
 
 **Backend Security:**
+- Security Headers: Helmet configurado com headers essenciais
+  - Content Security Policy (CSP): `default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: *; object-src 'none'; frame-src 'none'`
+  - X-Content-Type-Options: `nosniff`
+  - X-Frame-Options: `DENY`
+  - Strict-Transport-Security: `max-age=31536000; includeSubDomains; preload`
+  - Referrer-Policy: `same-origin`
+  - X-XSS-Protection: `0` (padrão moderno)
 - Input Validation: express-validator para todos os endpoints
 - Rate Limiting: express-rate-limit (100 req/min por IP)
-- CORS Policy: Configurado para domínios autorizados apenas
+- CORS Policy: Desabilitado por questões de segurança
 
 **Authentication Security:**
 - Token Storage: organizerId em localStorage (UUID não-sensitivo)
