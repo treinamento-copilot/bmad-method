@@ -1,0 +1,8 @@
+Este é um arquivo de teste criado na raiz do repositório bmad-method.
+
+Conteúdo do arquivo de teste:
+- Data de criação: 2024
+- Propósito: Teste conforme solicitado
+- Localização: Raiz do repositório
+
+Este arquivo demonstra que foi possível criar com sucesso um arquivo de teste na estrutura do projeto.
