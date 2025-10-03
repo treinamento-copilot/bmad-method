@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import CreateEvent from './pages/CreateEvent';
+import EventsListPage from './pages/EventsListPage';
 import './App.css';
 
 /**
@@ -14,6 +15,9 @@ function App() {
         <Routes>
           {/* Rota principal - formulário de criação de evento */}
           <Route path="/" element={<CreateEvent />} />
+          
+          {/* Rota para lista de eventos */}
+          <Route path="/events" element={<EventsListPage />} />
           
           {/* Rota para visualizar evento (para futuro uso) */}
           <Route 

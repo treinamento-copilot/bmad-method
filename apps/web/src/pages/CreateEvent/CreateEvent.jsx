@@ -60,6 +60,16 @@ const CreateEvent = () => {
 
   return (
     <div className={styles.container}>
+      {/* Navegação superior */}
+      <header className={styles.pageHeader}>
+        <button 
+          onClick={() => navigate('/events')}
+          className={styles.navButton}
+        >
+          📋 Ver Meus Eventos
+        </button>
+      </header>
+
       {/* Exibe erro se houver */}
       {error && (
         <div className={styles.errorContainer}>
