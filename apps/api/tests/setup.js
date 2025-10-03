@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 let mongoServer;
 
 // Configurar timeout padrão para testes
-jest.setTimeout(30000);
 
 // Mock de console.log para testes mais limpos
 const originalConsoleLog = console.log;
